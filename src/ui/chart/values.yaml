@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   repository: 056283020027.dkr.ecr.ca-central-1.amazonaws.com/retail-store-ui
   pullPolicy: IfNotPresent
-  tag: "514b25f"
+  tag: "2814dce"
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
