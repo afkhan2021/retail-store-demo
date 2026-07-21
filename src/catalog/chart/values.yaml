@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   repository: public.ecr.aws/aws-containers/retail-store-sample-catalog
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: "1.3.0"
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -58,16 +58,16 @@ configMap:
   name:
 app:
   persistence:
-    provider: mysql
+    provider: in-memory
     endpoint: ""
     database: "catalog"
     secret:
       create: true
       name: catalog-db
       username: catalog
-      password: "catalog123"
+      password: ""
 mysql:
-  create: true
+  create: false
   image:
     repository: public.ecr.aws/docker/library/mysql
     pullPolicy: IfNotPresent
