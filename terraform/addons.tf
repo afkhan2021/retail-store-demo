@@ -98,13 +98,25 @@ module "eks_addons" {
   }
 
   # =============================================================================
-  # OPTIONAL: AWS LOAD BALANCER CONTROLLER
+  # AWS LOAD BALANCER CONTROLLER
+  # Required for NLB provisioning with service annotations on EKS Auto Mode
+  # VPC ID must be explicitly set - EC2 metadata is unavailable on Auto Mode nodes
   # =============================================================================
-  # enable_aws_load_balancer_controller = true
-  # aws_load_balancer_controller = {
-  #   most_recent = true
-  #   namespace   = "kube-system"
-  # }
+  enable_aws_load_balancer_controller = true
+  aws_load_balancer_controller = {
+    most_recent = true
+    namespace   = "kube-system"
+    set = [
+      {
+        name  = "vpcId"
+        value = module.vpc.vpc_id
+      },
+      {
+        name  = "region"
+        value = var.aws_region
+      }
+    ]
+  }
 
   depends_on = [module.retail_app_eks]
 }
