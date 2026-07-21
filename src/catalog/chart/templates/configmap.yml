@@ -8,5 +8,7 @@ data:
   {{- if (eq "mysql" .Values.app.persistence.provider) }}
   RETAIL_CATALOG_PERSISTENCE_ENDPOINT: {{ include "catalog.mysql.endpoint" . }}
   RETAIL_CATALOG_PERSISTENCE_DB_NAME: {{ .Values.app.persistence.database }}
+  {{- else }}
+  RETAIL_CATALOG_PERSISTENCE_ENDPOINT: {{ .Values.app.persistence.endpoint | default "localhost" | quote }}
   {{- end }}
 {{- end }}
